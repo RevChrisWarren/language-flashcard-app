@@ -12,13 +12,21 @@ Deck.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
+User.hasMany(Card, {
+    foreignKey: 'user_id'
+});
+
+Card.belongsTo(User, {
+    foreignKey: 'user_id'
+});
+
 Deck.hasMany(Card, {
     foreignKey: 'deck_id'
 });
 
 Card.belongsTo(Deck, {
     foreignKey: 'deck_id'
-})
+});
 
 
 
