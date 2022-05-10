@@ -1,7 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
-const { beforeCreate, beforeUpdate } = require('../../just-tech-news/models/User');
+//const { beforeCreate, beforeUpdate } = require('../../language-app/models/User');
+
 
 //creating the language learner user
 
@@ -63,7 +64,7 @@ User.init(
         sequelize,
         timestamps: false,
         freezeTableName: true,
-        underscored, true,
+        underscored: true,
         modelName: 'user'
     }
 );

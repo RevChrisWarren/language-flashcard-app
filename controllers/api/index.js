@@ -1,16 +1,16 @@
 const router = require('express').Router();
 
-const userRoutes = require('./user-routes.js');
+const userRoutes = require('./user-routes');
 
-const cardRoutes = require('./card-routes.js');
+const cardRoutes = require('./card-routes');
 
-const deckRoutes = require('./deck-routes.js');
+const deckRoutes = require('./deck-routes');
 
-const withAuth = require('../../utils/auth');
+//const withAuth = require('../../utils/auth');
 
 
 router.use('/users', userRoutes);
-router.use('/cards', postRoutes);
-router.use('/decks', commentRoutes);
+router.use('/cards', cardRoutes);
+router.use('/decks', deckRoutes);
 
 module.exports = router;
