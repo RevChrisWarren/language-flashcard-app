@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         })
 });
 
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     //check the session
     if (req.session) {
         Card.create({
@@ -30,7 +30,7 @@ router.post('/', withAuth, (req, res) => {
     }
 });
 
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
     Card.destroy({
         where: {
             id: req.params.id
@@ -48,4 +48,4 @@ router.delete('/:id', withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
-module.esports = router;
+module.exports = router;
