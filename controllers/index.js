@@ -1,12 +1,11 @@
 const router = require("express").Router();
 
 const apiRoutes = require("./api");
+const homeRoutes = require("./home-routes.js");
 
 router.use("/api", apiRoutes);
-
-router.get("/edit", (req, res) => {
-  res.render("edit");
-});
+router.use("/", homeRoutes);
+router.use("/edit", homeRoutes);
 
 router.use((req, res) => {
   res.status(404).end();
