@@ -17,10 +17,14 @@ router.post('/', (req, res) => {
     //check the session
     if (req.session) {
         Card.create({
-            lang1_word: req.body.lang1_word,
-            lang2_word: req.body.lang2_word,
+            front: req.body.front,
+            back: req.body.back,
             deck_id: req.body.deck_id,
-            user_id: req.session.user_id
+            user_id: req.session.user_id,
+            interval: req.body.interval,
+            repetition: req.body.repetition,
+            efactor: req.body.efactor,
+            dueDate: req.body.dueDate
         })
             .then(dbCardData => res.json(dbCardData))
             .catch(err => {
