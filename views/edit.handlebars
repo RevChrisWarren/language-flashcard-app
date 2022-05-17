@@ -1,59 +1,66 @@
 <body>
-  <div class="row">
-    <div class="col-2 list">
-      <div class="dropdown">
-        <button
-          class="btn dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >Deck Name<span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Deck 1</a></li>
-          <li><a class="dropdown-item" href="#">Deck 2</a></li>
-          <li><a class="dropdown-item" href="#">Deck 3</a></li>
-        </ul>
-      </div>
-      <p>Description </p>
-      <form>
-        <input
-          name="card"
-          id="list-card-input"
-          autofocus="true"
-          placeholder="enter new card..."
-        />
-      </form>
-      <button class="add-new">Add New</button>
-      <div class="list-container"></div>
-      {{! <div class="list-card">
-        <div class="list-container">
-          <h4>Card</h4>
-        </div>
-      </div>
-      <div class="list-card">
-        <div class="list-container">
-          <h4>Card</h4>
-        </div>
-      </div>
-      <div class="list-card">
-        <div class="list-container">
-          <h4>Card</h4>
-        </div>
-      </div> }}
-    </div>
-    <div class="col-10 d-flex justify-content-evenly">
-      <div class="big-card">
-        <div class="big-container">
-          <h4>Lang1</h4>
-        </div>
-      </div>
-      <div class="big-card">
-        <div class="big-container">
-          <h4>Lang2</h4>
-        </div>
-      </div>
-    </div>
+  <div class="dropdown">
+    <button
+      class="btn dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >Deck Name<span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Deck 1</a></li>
+      <li><a class="dropdown-item" href="#">Deck 2</a></li>
+      <li><a class="dropdown-item" href="#">Deck 3</a></li>
+    </ul>
   </div>
+  <div class="row row-offcanvas row-offcanvas-left vh-100">
+    <div
+      class="col-md-3 col-lg-2 sidebar-offcanvas h-100 overflow-auto bg-light pl-0"
+    >
+      <h2>Cards</h2>
+      <ul class="list-container nav flex-column sticky-top pl-0 pt-5 mt-3">
+        <li class="list-card">1</li>
+        <li class="list-card">2</li>
+        <li class="list-card">3</li>
+        <li class="list-card">4</li>
+        <li class="list-card">5</li>
+        <li class="list-card">6</li>
+        <li class="list-card">7</li>
+        <li class="list-card">8</li>
+        <li class="list-card">9</li>
+        <li class="list-card">10</li>
+        <li class="list-card">11</li>
+      </ul>
+    </div>
+    <div class="col-6 d-flex justify-content-evenly">
+      <div class="big-card">
+        <form>
+          <input
+            name="front"
+            id="front"
+            placeholder="Front of card"
+            class="big-container"
+          />
+        </form>
+
+      </div>
+      <div class="big-card">
+        <form>
+          <input
+            name="back"
+            id="back"
+            placeholder="back of card"
+            class="big-container"
+          />
+        </form>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <button class="save btn btn-danger">Save</button>
+    </div>
+
+  </div>
+
   <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
   <!-- JavaScript Bundle with Popper -->
   <script
