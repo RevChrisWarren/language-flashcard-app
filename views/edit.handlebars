@@ -7,14 +7,26 @@
       aria-expanded="false"
     >Deck Name<span class="caret"></span></button>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Deck 1</a></li>
+      <li><a class="dropdown-item new-deck-btn">Add New Deck...</a></li>
+      {{! <li><a class="dropdown-item" href="#">Deck 1</a></li>
       <li><a class="dropdown-item" href="#">Deck 2</a></li>
-      <li><a class="dropdown-item" href="#">Deck 3</a></li>
+      <li><a class="dropdown-item" href="#">Deck 3</a></li> }}
     </ul>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-content"><span>&times;</span>
+      <p>Some text in the Modal...</p>
+      <form><input
+          name="newDeck"
+          id="new-deck-field"
+          placeholder="enter new deck name"
+        />
+        <button class="modal-btn">Save Deck</button></form>
+    </div>
   </div>
   <div class="row row-offcanvas row-offcanvas-left vh-100">
     <div
-      class="col-md-3 col-lg-2 sidebar-offcanvas h-100 overflow-auto bg-light pl-0"
+      class="col-md-3 col-lg-2 sidebar-offcanvas h-50 overflow-auto bg-light pl-0"
     >
       <h2>Cards</h2>
       <ul class="list-container nav flex-column sticky-top pl-0 pt-5 mt-3">

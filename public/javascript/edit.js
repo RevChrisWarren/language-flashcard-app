@@ -4,27 +4,32 @@ const listContainer = document.querySelector(".list-container");
 const saveBtn = document.querySelector(".save");
 const frontInputEl = document.querySelector("#front");
 const backInputEl = document.querySelector("#back");
+const addNewDeckBtn = document.querySelector(".new-deck-btn");
+const modal = document.getElementById("modal");
+const modalBtn = document.querySelector(".modal-btn");
+const newDeckEntryField = document.querySelector("#new-deck-field");
+const dropDownMenu = document.querySelector(".dropdown-menu");
 
 const cardListArr = [];
 
-// function addCard(event) {
-//   const listCard = document.createElement("div");
-//   listCard.classList = "list-card";
-//   event.preventDefault();
-//   const newCard = cardInputEl.value.trim();
-//   if (!newCard || newCard === "") {
-//     return alert("Error: Please enter a value for the card.");
-//   }
-//   cardListArr.push(cardInputEl.value);
-//   listCard.textContent = newCard;
-//   listContainer.append(listCard);
-//   console.log(cardListArr);
-//   cardInputEl.value = "";
-// }
+function addNewDeck() {
+  modal.style.display = "block";
+}
+
+function saveDeckName(event) {
+  event.preventDefault();
+  const newDeckEntry = newDeckEntryField.value.trim();
+  const newDeckListItem = document.createElement("li");
+  if (!newDeckEntry) {
+    return alert("Error: Please enter a Deck Name");
+  }
+  newDeckListItem.textContent = newDeckEntry;
+  dropDownMenu.append(newDeckListItem);
+  modal.style.display = "none";
+}
 
 function saveFrontBack(event) {
   event.preventDefault();
-  console.log("click");
   const frontCard = frontInputEl.value.trim();
   const backCard = backInputEl.value.trim();
   const listCard = document.createElement("div");
@@ -40,6 +45,6 @@ function saveFrontBack(event) {
   console.log(cardListArr);
 }
 
-const addNew = document.querySelector(".add-new");
-// addNew.addEventListener("click", addCard);
 saveBtn.addEventListener("click", saveFrontBack);
+addNewDeckBtn.addEventListener("click", addNewDeck);
+modalBtn.addEventListener("click", saveDeckName);
