@@ -17,7 +17,13 @@ Deck.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                models: 'user',
+                key: 'id'
+            }
+        },
     },
     {
         sequelize,

@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
             lang1_word: req.body.lang1_word,
             lang2_word: req.body.lang2_word,
             deck_id: req.body.deck_id,
-            user_id: req.session.iser_id
+            user_id: req.session.user_id
         })
             .then(dbCardData => res.json(dbCardData))
             .catch(err => {
