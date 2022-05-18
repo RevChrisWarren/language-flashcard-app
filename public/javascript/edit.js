@@ -17,6 +17,7 @@ const cardListArr = [];
 
 function addNewDeck() {
   modal.style.display = "block";
+  newCardBtn.style.display = "none";
 }
 
 function saveDeckName(event) {
@@ -30,10 +31,12 @@ function saveDeckName(event) {
   dropDownMenu.append(newDeckListItem);
   modal.style.display = "none";
   newDeckEntryField.value = "";
+  newCardBtn.style.display = "block";
 }
 
 function closeModal() {
   modal.style.display = "none";
+  newCardBtn.style.display = "block";
 }
 
 function newCard() {
