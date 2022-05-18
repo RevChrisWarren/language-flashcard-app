@@ -13,11 +13,27 @@ Card.init(
             primaryKey: true,
             autoIncrement: true
         },
-        lang1_word: {
+        front: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        lang2_word: {
+        back: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        interval: {
+            type: DataTypes.DECIMAL,
+            allowNull: false
+        },
+        repetition: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        efactor: {
+            type: DataTypes.DECIMAL,
+            allowNull: false
+        },
+        dueDate: {
             type: DataTypes.STRING,
             allowNull: false
         },
