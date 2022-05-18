@@ -14,13 +14,9 @@
     </ul>
   </div>
   <div id="modal" class="modal">
-    <div class="modal-content"><span>&times;</span>
-      <p>Some text in the Modal...</p>
-      <form><input
-          name="newDeck"
-          id="new-deck-field"
-          placeholder="enter new deck name"
-        />
+    <div class="modal-content"><span class="close">&times;</span>
+      <p>Enter a name for a new Deck and click Save Deck</p>
+      <form><input name="newDeck" id="new-deck-field" placeholder="deck name" />
         <button class="modal-btn">Save Deck</button></form>
     </div>
   </div>
@@ -29,9 +25,9 @@
       class="col-md-3 col-lg-2 sidebar-offcanvas h-50 overflow-auto bg-light pl-0"
     >
       <h2>Cards</h2>
-      <ul class="list-container nav flex-column sticky-top pl-0 pt-5 mt-3">
-        <li class="list-card">1</li>
-        <li class="list-card">2</li>
+      <ul class="list-container nav flex-column sticky-top pl-0 pt-5 mt-0">
+        <button class="new-card-btn">Add New Card</button>
+        {{! <li class="list-card">2</li>
         <li class="list-card">3</li>
         <li class="list-card">4</li>
         <li class="list-card">5</li>
@@ -40,7 +36,7 @@
         <li class="list-card">8</li>
         <li class="list-card">9</li>
         <li class="list-card">10</li>
-        <li class="list-card">11</li>
+        <li class="list-card">11</li> }}
       </ul>
     </div>
     <div class="col-6 d-flex justify-content-evenly">
@@ -69,6 +65,7 @@
 
     <div class="col-2">
       <button class="save btn btn-danger">Save</button>
+      <button class="edit btn btn-warning">Update</button>
     </div>
 
   </div>
