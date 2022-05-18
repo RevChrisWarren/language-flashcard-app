@@ -4,6 +4,9 @@ const { User, Card, Deck } = require('../../models');
 router.get('/', (req, res) => {
     //asscess card model and find all
     Card.findAll({
+        where: {
+            deck_id: req.body.deck_id
+        }
 
     })
         .then(dbCardData => res.json(dbCardData))
