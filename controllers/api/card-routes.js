@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const { User, Card, Deck } = require('../../models');
+const supermemo =require('supermemo');
+
+
 
 router.get('/', (req, res) => {
     //asscess card model and find all
@@ -7,7 +10,6 @@ router.get('/', (req, res) => {
         where: {
             deck_id: req.body.deck_id
         }
-
     })
         .then(dbCardData => res.json(dbCardData))
         .catch(err => {
@@ -36,6 +38,20 @@ router.post('/', (req, res) => {
             })
     }
 });
+
+// update card content
+router.put('/:card_id', (req, res) => {
+    Card.destroy({
+
+    })
+});
+
+// update card for study info
+router.patch('/:card_id', (req, res) => {
+    Card.destroy({
+
+    })
+})
 
 router.delete('/:id', (req, res) => {
     Card.destroy({
