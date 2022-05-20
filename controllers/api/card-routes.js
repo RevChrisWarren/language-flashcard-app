@@ -41,14 +41,21 @@ router.post('/', (req, res) => {
 
 // update card content
 router.put('/:card_id', (req, res) => {
-    Card.destroy({
-
+    Card.update(
+        {
+        front: req.body.front,
+        back: req.body.back
+        },
+        {where: {id: req.body.card_id}
     })
+    .then(
+        
+    )
 });
 
 // update card for study info
 router.patch('/:card_id', (req, res) => {
-    Card.destroy({
+    Card.update({
 
     })
 })

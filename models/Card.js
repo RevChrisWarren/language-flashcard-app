@@ -23,11 +23,13 @@ Card.init(
         },
         interval: {
             type: DataTypes.DECIMAL,
-            allowNull: false
+            allowNull: false,
+            default: 0
         },
         repetition: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            default: 0
         },
         efactor: {
             type: DataTypes.DECIMAL,
