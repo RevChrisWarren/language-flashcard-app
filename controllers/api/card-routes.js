@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User, Card, Deck } = require('../../models');
-const supermemo =require('supermemo');
+const {supermemo} = require('supermemo');
 
 
 
@@ -41,23 +41,55 @@ router.post('/', (req, res) => {
 
 // update card content
 router.put('/:card_id', (req, res) => {
-    Card.update(
-        {
-        front: req.body.front,
-        back: req.body.back
-        },
-        {where: {id: req.body.card_id}
-    })
-    .then(
-        
-    )
+    //check for session
+    if (req.session) {
+        console.log(req.session)
+        Card.update(
+            {
+            front: req.body.front,
+            back: req.body.back
+            },
+            {where: {id: req.params.card_id}
+        })
+        .then(dbCardData => res.json(dbCardData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })  
+    }
 });
 
 // update card for study info
-router.patch('/:card_id', (req, res) => {
-    Card.update({
+router.patch('/:card_id', async (req, res) => {
+    // check for session
+    if (req.session) {
+        //find card by primary key, create an object with update parameters, execute algorithm modification, save updated card, and send back response
+        const modifiedCard = await Card.findByPk(req.params.card_id);
+        
+        let updateObject = {
+            interval: parseInt(modifiedCard.dataValues.interval),
+            repetition: parseInt(modifiedCard.dataValues.repetition),
+            efactor: parseInt(modifiedCard.dataValues.efactor)
+        }
+        
+        console.log(updateObject);
 
-    })
+        updateObject = supermemo(updateObject, req.body.userResponse);
+
+        console.log(updateObject);
+        
+        modifiedCard.update({
+        interval: updateObject.interval,
+        efactor: updateObject.efactor,
+        repetition: updateObject.repetition    
+        })
+
+        .then(dbCardData => res.json(dbCardData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        }) 
+    }
 })
 
 router.delete('/:id', (req, res) => {

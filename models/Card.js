@@ -22,18 +22,19 @@ Card.init(
             allowNull: false
         },
         interval: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.REAL,
             allowNull: false,
-            default: 0
+            defaultValue: 0
         },
         repetition: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            default: 0
+            defaultValue: 0
         },
         efactor: {
-            type: DataTypes.DECIMAL,
-            allowNull: false
+            type: DataTypes.REAL,
+            allowNull: false,
+            defaultValue: 2.5
         },
         dueDate: {
             type: DataTypes.STRING,

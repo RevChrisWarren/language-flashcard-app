@@ -10,10 +10,10 @@ let item = {
 }
 console.log(item);
 
-item = supermemo(item, 1);
+item = supermemo(item, 5);
 console.log(item);
 
-item = supermemo(item, 4);
+item = supermemo(item, 5);
 console.log(item);
 
 item = supermemo(item, 5);
