@@ -88,3 +88,41 @@ a:link {
 .edit {
   display: none;
 }
+#hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.5),
+  rgba(0, 0, 0, 0.5)
+  ), 
+  url(../images/jacqueline-brandwayn-S8MSj5VzHxQ-unsplash.jpg) 50% no-repeat;
+  background-size: cover;
+  height: 50vh;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#header-link {
+  color: white;
+  font-size: 120px;
+  text-shadow: 1px 1px 2px black;
+  
+}
+#header-link:hover {
+  color:cadetblue;
+  transition: .75s;
+
+}
+.login-link {
+  text-align: center;
+  padding: 45px;
+  text-shadow: 1px 1px 2px rgb(146, 141, 141);
+}
+#login-link {
+  padding: 45px;
+  text-align: center;
+}
+
+#login-link:hover {
+  color:rgb(227, 51, 177);
+  transition: .75s;
+}
