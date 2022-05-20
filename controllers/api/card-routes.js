@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Card, Deck } = require('../../models');
 const {supermemo} = require('supermemo');
+const dayjs = require('dayjs');
 
 
 
@@ -81,7 +82,8 @@ router.patch('/:card_id', async (req, res) => {
         modifiedCard.update({
         interval: updateObject.interval,
         efactor: updateObject.efactor,
-        repetition: updateObject.repetition    
+        repetition: updateObject.repetition,
+        dueDate: dayjs(Date.now()).add(updateObject.interval, 'day').toISOString()
         })
 
         .then(dbCardData => res.json(dbCardData))
