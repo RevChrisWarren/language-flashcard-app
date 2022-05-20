@@ -40,10 +40,7 @@ async function saveDeckName(event) {
   newDeckListItem.addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector(".dropdown-toggle").innerHTML = newDeckEntry;
-    fetch("/api/", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+    let queryUrl = fetch("/api/");
   });
 
   console.log(newDeckListItem);
