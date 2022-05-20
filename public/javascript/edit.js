@@ -10,33 +10,52 @@ const modalBtn = document.querySelector(".modal-btn");
 const newDeckEntryField = document.querySelector("#new-deck-field");
 const dropDownMenu = document.querySelector(".dropdown-menu");
 const span = document.querySelector(".close");
-const newCardBtn = document.querySelector(".new-card-btn");
+// const newCardBtn = document.querySelector(".new-card-btn");
 const UpdateBtn = document.querySelector(".edit");
 
 const cardListArr = [];
 
 function addNewDeck() {
   modal.style.display = "block";
-  newCardBtn.style.display = "none";
+  // newCardBtn.style.display = "none";
+}
+function showDeckList() {
+  console.log("test");
 }
 
-function saveDeckName(event) {
+async function saveDeckName(event) {
   event.preventDefault();
   const newDeckEntry = newDeckEntryField.value.trim();
   const newDeckListItem = document.createElement("li");
   if (!newDeckEntry) {
     return alert("Error: Please enter a Deck Name");
   }
-  newDeckListItem.textContent = newDeckEntry;
+  let newDeck = await fetch("/api/decks/", {
+    method: "POST",
+    body: JSON.stringify({ newDeckEntry }),
+    headers: { "Content-Type": "application/json" },
+  });
+  // newDeckListItem.textContent = newDeckEntry;
+  newDeckListItem.innerHTML = `<a class="dropdown-item">${newDeckEntry}</a>`;
+  newDeckListItem.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.querySelector(".dropdown-toggle").innerHTML = newDeckEntry;
+    fetch("/api/", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+  });
+
+  console.log(newDeckListItem);
   dropDownMenu.append(newDeckListItem);
   modal.style.display = "none";
   newDeckEntryField.value = "";
-  newCardBtn.style.display = "block";
+  // newCardBtn.style.display = "block";
 }
 
 function closeModal() {
   modal.style.display = "none";
-  newCardBtn.style.display = "block";
+  // newCardBtn.style.display = "block";
 }
 
 function newCard() {
@@ -88,4 +107,4 @@ saveBtn.addEventListener("click", saveFrontBack);
 addNewDeckBtn.addEventListener("click", addNewDeck);
 modalBtn.addEventListener("click", saveDeckName);
 span.addEventListener("click", closeModal);
-newCardBtn.addEventListener("click", newCard);
+// newCardBtn.addEventListener("click", newCard);
