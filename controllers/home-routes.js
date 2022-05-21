@@ -12,6 +12,9 @@ router.get("/login", (req, res) => {
 
 router.get("/edit", (req, res) => {
   Deck.findAll({
+    where: {
+      user_id: req.session.user_id,
+    },
     attributes: ["id", "name", "user_id"],
   }).then((dbDeckData) => {
     const decks = dbDeckData.map((deck) => deck.get({ plain: true }));

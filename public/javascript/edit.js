@@ -10,14 +10,13 @@ const modalBtn = document.querySelector(".modal-btn");
 const newDeckEntryField = document.querySelector("#new-deck-field");
 const dropDownMenu = document.querySelector(".dropdown-menu");
 const span = document.querySelector(".close");
-// const newCardBtn = document.querySelector(".new-card-btn");
+const newCardBtn = document.querySelector(".new-card-btn");
 const UpdateBtn = document.querySelector(".edit");
 
 const cardListArr = [];
 
 function addNewDeck() {
   modal.style.display = "block";
-  // newCardBtn.style.display = "none";
 }
 function showDeckList() {
   console.log("test");
@@ -44,21 +43,34 @@ async function saveDeckName(event) {
   dropDownMenu.append(newDeckListItem);
   modal.style.display = "none";
   newDeckEntryField.value = "";
-  // newCardBtn.style.display = "block";
+  newCardBtn.style.display = "block";
 }
 
 let dropdownItem = document
   .querySelectorAll(".dropdown-item")
   .forEach((item) => {
-    item.addEventListener("click", (e) => {
+    item.addEventListener("click", async (e) => {
       e.preventDefault();
       document.querySelector(".dropdown-toggle").innerHTML = item.innerHTML;
+      console.log(e.target.dataset.id);
+      let res = await fetch(`/api/cards?deck_id=${e.target.dataset.id}`);
+      let data = await res.json();
+      console.log("data: ", data);
+      listContainer.dataset.deck_id = e.target.dataset.id;
+      data.forEach((card) => {
+        const cardLi = document.createElement("li");
+        cardLi.classList = "list-card";
+        cardLi.textContent = `${card.front} / ${card.back}`;
+        cardLi.dataset.card_id = card.id;
+        cardLi.dataset.deck_id = card.deck_id;
+        listContainer.append(cardLi);
+      });
     });
   });
 
 function closeModal() {
   modal.style.display = "none";
-  // newCardBtn.style.display = "block";
+  newCardBtn.style.display = "block";
 }
 
 function newCard() {
@@ -69,11 +81,11 @@ function newCard() {
   UpdateBtn.style.display = "none";
 }
 
-function saveFrontBack(event) {
+async function saveFrontBack(event) {
   event.preventDefault();
   const frontCard = frontInputEl.value.trim();
   const backCard = backInputEl.value.trim();
-  const listCard = document.createElement("div");
+  const listCard = document.createElement("li");
   listCard.classList = "list-card";
   listCard.id = "list-card";
   if (!frontCard || !backCard) {
@@ -82,10 +94,28 @@ function saveFrontBack(event) {
   cardListArr.push(frontInputEl.value);
   cardListArr.push(backInputEl.value);
   listCard.textContent = frontCard + " / " + backCard;
-  listContainer.append(listCard);
+
+  const deckId = listContainer.dataset.deck_id;
+  console.log("deckId : ", deckId);
+
   frontInputEl.value = "";
   backInputEl.value = "";
-  console.log(cardListArr);
+  try {
+    let newCard = await fetch("/api/cards/", {
+      method: "POST",
+      body: JSON.stringify({
+        front: frontCard,
+        back: backCard,
+        deck_id: deckId,
+        dueDate: new Date(),
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+    await newCard.json();
+    listContainer.append(listCard);
+  } catch (error) {
+    window.alert("Failed to create a card");
+  }
 }
 
 const listCardContainer = document.querySelector(".list-container");
@@ -110,4 +140,4 @@ saveBtn.addEventListener("click", saveFrontBack);
 addNewDeckBtn.addEventListener("click", addNewDeck);
 modalBtn.addEventListener("click", saveDeckName);
 span.addEventListener("click", closeModal);
-// newCardBtn.addEventListener("click", newCard);
+newCardBtn.addEventListener("click", newCard);
