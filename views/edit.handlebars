@@ -8,6 +8,9 @@
     >Deck Name<span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li><a class="dropdown-item new-deck-btn">Add New Deck...</a></li>
+      {{#each decks as |deck|}}
+        <li><a class="dropdown-item">{{name}}</a></li>
+      {{/each}}
       {{! <li><a class="dropdown-item" href="#">Deck 1</a></li>
       <li><a class="dropdown-item" href="#">Deck 2</a></li>
       <li><a class="dropdown-item" href="#">Deck 3</a></li> }}

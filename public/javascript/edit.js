@@ -35,20 +35,26 @@ async function saveDeckName(event) {
     body: JSON.stringify({ newDeckEntry }),
     headers: { "Content-Type": "application/json" },
   });
-  // newDeckListItem.textContent = newDeckEntry;
   newDeckListItem.innerHTML = `<a class="dropdown-item">${newDeckEntry}</a>`;
   newDeckListItem.addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector(".dropdown-toggle").innerHTML = newDeckEntry;
     let queryUrl = fetch("/api/");
   });
-
-  console.log(newDeckListItem);
   dropDownMenu.append(newDeckListItem);
   modal.style.display = "none";
   newDeckEntryField.value = "";
   // newCardBtn.style.display = "block";
 }
+
+let dropdownItem = document
+  .querySelectorAll(".dropdown-item")
+  .forEach((item) => {
+    item.addEventListener("click", (e) => {
+      e.preventDefault();
+      document.querySelector(".dropdown-toggle").innerHTML = item.innerHTML;
+    });
+  });
 
 function closeModal() {
   modal.style.display = "none";

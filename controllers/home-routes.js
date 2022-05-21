@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const Sequelize = require("../config/connection");
+const { Deck } = require("../models");
 
 router.get("/", (req, res) => {
   res.render("homepage");
@@ -9,7 +11,12 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/edit", (req, res) => {
-  res.render("edit");
+  Deck.findAll({
+    attributes: ["id", "name", "user_id"],
+  }).then((dbDeckData) => {
+    const decks = dbDeckData.map((deck) => deck.get({ plain: true }));
+    res.render("edit", { decks });
+  });
 });
 
 module.exports = router;
