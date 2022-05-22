@@ -1,3 +1,5 @@
+// const { json } = require("sequelize/types");
+
 const listEl = document.querySelector(".list");
 const cardInputEl = document.querySelector("#list-card-input");
 const listContainer = document.querySelector(".list-container");
@@ -11,7 +13,7 @@ const newDeckEntryField = document.querySelector("#new-deck-field");
 const dropDownMenu = document.querySelector(".dropdown-menu");
 const span = document.querySelector(".close");
 const newCardBtn = document.querySelector(".new-card-btn");
-const UpdateBtn = document.querySelector(".edit");
+const updateBtn = document.querySelector(".edit");
 const removeDeckBtn = document.querySelector(".remove-deck-btn");
 
 const cardListArr = [];
@@ -59,11 +61,14 @@ let dropdownItem = document
       listContainer.dataset.deck_id = e.target.dataset.id;
       data.forEach((card) => {
         const cardLi = document.createElement("li");
+        const exBox = document.createElement("button");
         cardLi.classList = "list-card";
         cardLi.textContent = `${card.front} / ${card.back}`;
         cardLi.dataset.card_id = card.id;
         cardLi.dataset.deck_id = card.deck_id;
         listContainer.append(cardLi);
+        cardLi.append(exBox);
+        exBox.innerHTML = "X";
       });
     });
   });
@@ -96,6 +101,7 @@ async function saveFrontBack(event) {
   const frontCard = frontInputEl.value.trim();
   const backCard = backInputEl.value.trim();
   const listCard = document.createElement("li");
+  const exBox = document.createElement("button");
   listCard.classList = "list-card";
   listCard.id = "list-card";
   if (!frontCard || !backCard) {
@@ -104,6 +110,9 @@ async function saveFrontBack(event) {
   cardListArr.push(frontInputEl.value);
   cardListArr.push(backInputEl.value);
   listCard.textContent = frontCard + " / " + backCard;
+  listCard.appendChild(exBox);
+  console.log(exBox);
+  exBox.innerHTML = " X";
 
   const deckId = listContainer.dataset.deck_id;
   console.log("deckId : ", deckId);
@@ -135,17 +144,32 @@ listCardContainer.addEventListener("click", function (e) {
     frontInputEl.value = word[0];
     backInputEl.value = word[1];
     saveBtn.style.display = "none";
-    UpdateBtn.style.display = "block";
+    updateBtn.style.display = "block";
+    updateBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      e.target.innerHTML = frontInputEl.value + " / " + backInputEl.value;
+      fetch(`/api/cards`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          front: word[0],
+          back: word[1],
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+    });
   }
 });
 
-function updateCard(e) {
-  e.preventDefault();
-  console.log("update");
-  console.log(e.target);
-}
+// function updateCard(e) {
+//   e.preventDefault();
+//   console.log("update");
+//   console.log(e.target);
+// }
 
-UpdateBtn.addEventListener("click", updateCard);
 saveBtn.addEventListener("click", saveFrontBack);
 addNewDeckBtn.addEventListener("click", addNewDeck);
 modalBtn.addEventListener("click", saveDeckName);
