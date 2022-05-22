@@ -12,6 +12,7 @@ const dropDownMenu = document.querySelector(".dropdown-menu");
 const span = document.querySelector(".close");
 const newCardBtn = document.querySelector(".new-card-btn");
 const UpdateBtn = document.querySelector(".edit");
+const removeDeckBtn = document.querySelector(".remove-deck-btn");
 
 const cardListArr = [];
 
@@ -38,7 +39,6 @@ async function saveDeckName(event) {
   newDeckListItem.addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector(".dropdown-toggle").innerHTML = newDeckEntry;
-    let queryUrl = fetch("/api/");
   });
   dropDownMenu.append(newDeckListItem);
   modal.style.display = "none";
@@ -67,6 +67,16 @@ let dropdownItem = document
       });
     });
   });
+
+removeDeckBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  console.log(item.dataset.id);
+  fetch("/api/decks/" + item.dataset.id, {
+    method: "DELETE",
+  })
+    .then((res) => res.text())
+    .then((res) => console.log(res));
+});
 
 function closeModal() {
   modal.style.display = "none";
