@@ -69,6 +69,11 @@ let dropdownItem = document
         listContainer.append(cardLi);
         cardLi.append(exBox);
         exBox.innerHTML = "X";
+        exBox.addEventListener("click", () => {
+          fetch(`api/cards/${cardLi.dataset.card_id}`, {
+            method: "DELETE",
+          });
+        });
       });
     });
   });
