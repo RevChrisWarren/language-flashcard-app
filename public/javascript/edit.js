@@ -63,7 +63,7 @@ let dropdownItem = document
         const cardLi = document.createElement("li");
         const exBox = document.createElement("button");
         cardLi.classList = "list-card";
-        cardLi.textContent = `${card.front} / ${card.back}`;
+        cardLi.textContent = `${card.front} / ${card.back} / `;
         cardLi.dataset.card_id = card.id;
         cardLi.dataset.deck_id = card.deck_id;
         listContainer.append(cardLi);
@@ -72,6 +72,12 @@ let dropdownItem = document
         exBox.addEventListener("click", () => {
           fetch(`api/cards/${cardLi.dataset.card_id}`, {
             method: "DELETE",
+          }).then((response) => {
+            if (response.ok) {
+              cardLi.remove();
+            } else {
+              alert(response.statusText);
+            }
           });
         });
       });
@@ -148,13 +154,14 @@ listCardContainer.addEventListener("click", function (e) {
     const word = e.target.innerHTML.split(" / ");
     frontInputEl.value = word[0];
     backInputEl.value = word[1];
+    console.log(word);
     saveBtn.style.display = "none";
     updateBtn.style.display = "block";
     updateBtn.addEventListener("click", (event) => {
       event.preventDefault();
       e.target.innerHTML = frontInputEl.value + " / " + backInputEl.value;
       fetch(`/api/cards`, {
-        method: "PATCH",
+        method: "PUT",
         body: JSON.stringify({
           front: word[0],
           back: word[1],
