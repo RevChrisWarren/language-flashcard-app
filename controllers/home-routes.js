@@ -3,11 +3,16 @@ const Sequelize = require("../config/connection");
 const { Deck } = require("../models");
 
 router.get("/", (req, res) => {
-  res.render("homepage");
+  res.render("homepage", {
+    loggedIn: req.session.loggedIn
+  });
+
 });
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", {
+    loggedIn: req.session.loggedIn
+  });
 });
 
 router.get("/edit", (req, res) => {

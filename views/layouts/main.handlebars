@@ -16,14 +16,21 @@
   <body>
     <div class="wrapper">
       <header class="d-flex p-2 justify-content-between">
-        <h1 class="coname"><a href="/login">Lingo</a>
+        <h1 class="coname"><a href="/">Lingo</a>
         </h1>
         <nav>
+<<<<<<< HEAD
 
           <a href="/edit">My Decks</a>
 
           <a href="/play">Play!</a>
+=======
+          <a href="/edit">Edit your Decks</a></br>
+          <a href="/play">Drill</a></br>
+          {{#if loggedIn}}
+>>>>>>> f91fdd446a31aec2fd15e51893961c5ff792f6cc
           <button id="logout" class="btn-no-style">Logout</button>
+          {{/if}}
         </nav>
       </header>
       <main>
@@ -33,6 +40,8 @@
         <p class="foot">Thanks for playing!</p>
       </footer>
     </div>
-
+ {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+    {{/if}}
   </body>
 </html>
