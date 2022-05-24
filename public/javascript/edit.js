@@ -53,6 +53,9 @@ let dropdownItem = document
   .forEach((item) => {
     item.addEventListener("click", async (e) => {
       e.preventDefault();
+      let previousCard = document.querySelectorAll(".list-card");
+      console.log(previousCard);
+      previousCard.length = 0;
       document.querySelector(".dropdown-toggle").innerHTML = item.innerHTML;
       console.log(e.target.dataset.id);
       let res = await fetch(`/api/cards?deck_id=${e.target.dataset.id}`);
