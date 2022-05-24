@@ -26,22 +26,29 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  Deck.destroy({
+  Card.destroy({
     where: {
-      id: req.params.id,
-    },
-  })
-    .then((dbDeckData) => {
-      if (!dbDeckData) {
-        res.status(404).json({ message: "No deck found with that id" });
-        return;
-      }
-      res.json(dbDeckData);
+      deck_id: req.params.id
+    }
+
+  }).then(() => {
+    Deck.destroy({
+      where: {
+        id: req.params.id,
+      },
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+      .then((dbDeckData) => {
+        if (!dbDeckData) {
+          res.status(404).json({ message: "No deck found with that id" });
+          return;
+        }
+        res.json(dbDeckData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
 });
 
 module.exports = router;

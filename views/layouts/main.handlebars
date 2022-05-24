@@ -19,11 +19,11 @@
         <h1 class="coname"><a href="/login">Lingo</a>
         </h1>
         <nav>
-          {{#if edit}}
-            <a href="/decks">My Decks</a>
-          {{/if}}
-          <a href="/play">Play!</a>
+          <a href="/edit">Edit your Decks</a></br>
+          <a href="/play">Drill</a></br>
+          {{#if loggedIn}}
           <button id="logout" class="btn-no-style">Logout</button>
+          {{/if}}
         </nav>
       </header>
       <main>
