@@ -85,22 +85,32 @@ let dropdownItem = document
           });
         });
       });
+      removeDeckBtn.addEventListener("click", () => {
+        console.log("Clicking delete");
+        fetch("api/decks/" + e.target.dataset.id, {
+          method: "DELETE",
+        }).then((response) => {
+          if (response.ok) {
+            window.location.reload();
+          }
+        });
+      });
     });
   });
 
-removeDeckBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log(dropDownMenu);
-  dropDownMenu.forEach((item) => {
-    console.log(item);
-  });
+// removeDeckBtn.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   console.log(dropDownMenu);
+//   dropDownMenu.forEach((item) => {
+//     console.log(item);
+//   });
 
-  fetch("/api/decks/" + item.dataset.id, {
-    method: "DELETE",
-  })
-    .then((res) => res.text())
-    .then((res) => console.log(res));
-});
+//   fetch("/api/decks/" + item.dataset.id, {
+//     method: "DELETE",
+//   })
+//     .then((res) => res.text())
+//     .then((res) => console.log(res));
+// });
 
 function closeModal() {
   modal.style.display = "none";
@@ -152,7 +162,6 @@ async function saveFrontBack(event) {
   } catch (error) {
     window.alert("Failed to create a card");
   }
-  console.log("deckId : ", deckId);
 }
 
 const listCardContainer = document.querySelector(".list-container");
