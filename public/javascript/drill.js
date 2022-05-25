@@ -33,9 +33,9 @@ function populateDrillCard(cards) {
     if (cardIterator < cards.length - 1) {
         const cardFrontTextEl = document.getElementById("card-front-text");
         const cardBackTextEl = document.getElementById("card-back-text");
-        const cardBackEl = document.getElementById("card-back");
+        const buttonContainerEl = document.getElementById("button-container");
     
-        cardBackEl.dataset.cardId = cards[cardIterator].id
+        buttonContainerEl.dataset.cardId = cards[cardIterator].id;
         cardFrontTextEl.textContent = cards[cardIterator].front;
         cardBackTextEl.textContent = cards[cardIterator].back;
     
@@ -81,11 +81,23 @@ function drillRating(e) {
 
 // functions responsible for applying and removing flip class to drilling card
 function flipCard() {
- const cardEl = document.getElementById("card-content");
- cardEl.classList.add("card-flip");
+    const cardBackTextEl = document.getElementById("card-back-text");
+    cardBackTextEl.classList.remove("d-none");
+    
+    const buttonContainerEl = document.getElementById("button-container");
+    buttonContainerEl.classList.remove("d-none");
+    
+    const cardEl = document.getElementById("card-content");
+    cardEl.classList.add("card-flip");
 }
 
 function unflipCard() {
+    const cardBackTextEl = document.getElementById("card-back-text");
+    cardBackTextEl.classList.add("d-none");
+    
+    const buttonContainerEl = document.getElementById("button-container");
+    buttonContainerEl.classList.add("d-none");
+    
     const cardEl = document.getElementById("card-content");
     cardEl.classList.remove("card-flip");
 }
