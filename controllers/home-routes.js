@@ -23,7 +23,7 @@ router.get("/edit", (req, res) => {
     attributes: ["id", "name", "user_id"],
   }).then((dbDeckData) => {
     const decks = dbDeckData.map((deck) => deck.get({ plain: true }));
-    res.render("edit", { decks });
+    res.render("edit", { decks, loggedIn: req.session.loggedIn });
   });
 });
 
