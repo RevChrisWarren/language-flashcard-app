@@ -13,7 +13,7 @@ const newDeckEntryField = document.querySelector("#new-deck-field");
 const dropDownMenu = document.querySelector(".dropdown-menu");
 const span = document.querySelector(".close");
 const newCardBtn = document.querySelector(".new-card-btn");
-const updateBtn = document.querySelector(".edit");
+// const updateBtn = document.querySelector(".edit");
 const removeDeckBtn = document.querySelector(".remove-deck-btn");
 
 const cardListArr = [];
@@ -53,6 +53,10 @@ let dropdownItem = document
   .forEach((item) => {
     item.addEventListener("click", async (e) => {
       e.preventDefault();
+      let previousCard = document.querySelectorAll(".list-card");
+      previousCard.forEach((i) => {
+        i.remove();
+      });
       document.querySelector(".dropdown-toggle").innerHTML = item.innerHTML;
       console.log(e.target.dataset.id);
       let res = await fetch(`/api/cards?deck_id=${e.target.dataset.id}`);
@@ -63,25 +67,50 @@ let dropdownItem = document
         const cardLi = document.createElement("li");
         const exBox = document.createElement("button");
         cardLi.classList = "list-card";
-        cardLi.textContent = `${card.front} / ${card.back}`;
+        cardLi.textContent = `${card.front} / ${card.back} / `;
         cardLi.dataset.card_id = card.id;
         cardLi.dataset.deck_id = card.deck_id;
         listContainer.append(cardLi);
         cardLi.append(exBox);
         exBox.innerHTML = "X";
+        exBox.addEventListener("click", () => {
+          fetch(`api/cards/${cardLi.dataset.card_id}`, {
+            method: "DELETE",
+          }).then((response) => {
+            if (response.ok) {
+              cardLi.remove();
+            } else {
+              alert(response.statusText);
+            }
+          });
+        });
+      });
+      removeDeckBtn.addEventListener("click", () => {
+        console.log("Clicking delete");
+        fetch("api/decks/" + e.target.dataset.id, {
+          method: "DELETE",
+        }).then((response) => {
+          if (response.ok) {
+            window.location.reload();
+          }
+        });
       });
     });
   });
 
-removeDeckBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log(item.dataset.id);
-  fetch("/api/decks/" + item.dataset.id, {
-    method: "DELETE",
-  })
-    .then((res) => res.text())
-    .then((res) => console.log(res));
-});
+// removeDeckBtn.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   console.log(dropDownMenu);
+//   dropDownMenu.forEach((item) => {
+//     console.log(item);
+//   });
+
+//   fetch("/api/decks/" + item.dataset.id, {
+//     method: "DELETE",
+//   })
+//     .then((res) => res.text())
+//     .then((res) => console.log(res));
+// });
 
 function closeModal() {
   modal.style.display = "none";
@@ -93,7 +122,7 @@ function newCard() {
   frontInputEl.value = "";
   backInputEl.value = "";
   saveBtn.style.display = "block";
-  UpdateBtn.style.display = "none";
+  // UpdateBtn.style.display = "none";
 }
 
 async function saveFrontBack(event) {
@@ -111,11 +140,9 @@ async function saveFrontBack(event) {
   cardListArr.push(backInputEl.value);
   listCard.textContent = frontCard + " / " + backCard;
   listCard.appendChild(exBox);
-  console.log(exBox);
   exBox.innerHTML = " X";
 
   const deckId = listContainer.dataset.deck_id;
-  console.log("deckId : ", deckId);
 
   frontInputEl.value = "";
   backInputEl.value = "";
@@ -143,24 +170,25 @@ listCardContainer.addEventListener("click", function (e) {
     const word = e.target.innerHTML.split(" / ");
     frontInputEl.value = word[0];
     backInputEl.value = word[1];
+    console.log(word);
     saveBtn.style.display = "none";
-    updateBtn.style.display = "block";
-    updateBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      e.target.innerHTML = frontInputEl.value + " / " + backInputEl.value;
-      fetch(`/api/cards`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          front: word[0],
-          back: word[1],
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => console.log(json));
-    });
+    // updateBtn.style.display = "block";
+    // updateBtn.addEventListener("click", (event) => {
+    //   event.preventDefault();
+    //   e.target.innerHTML = frontInputEl.value + " / " + backInputEl.value;
+    //   fetch(`/api/cards`, {
+    //     method: "PUT",
+    //     body: JSON.stringify({
+    //       front: word[0],
+    //       back: word[1],
+    //     }),
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8",
+    //     },
+    //   })
+    //     .then((response) => response.json())
+    //     .then((json) => console.log(json));
+    // });
   }
 });
 
