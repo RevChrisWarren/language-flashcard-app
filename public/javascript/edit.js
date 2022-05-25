@@ -42,6 +42,7 @@ async function saveDeckName(event) {
   modal.style.display = "none";
   newDeckEntryField.value = "";
   newCardBtn.style.display = "block";
+  window.location.reload();
 }
 
 let dropdownItem = document
