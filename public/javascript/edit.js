@@ -1,5 +1,3 @@
-// const { json } = require("sequelize/types");
-
 const listEl = document.querySelector(".list");
 const cardInputEl = document.querySelector("#list-card-input");
 const listContainer = document.querySelector(".list-container");
@@ -21,9 +19,7 @@ const cardListArr = [];
 function addNewDeck() {
   modal.style.display = "block";
 }
-function showDeckList() {
-  console.log("test");
-}
+function showDeckList() {}
 
 async function saveDeckName(event) {
   event.preventDefault();
@@ -46,6 +42,7 @@ async function saveDeckName(event) {
   modal.style.display = "none";
   newDeckEntryField.value = "";
   newCardBtn.style.display = "block";
+  window.location.reload();
 }
 
 let dropdownItem = document
@@ -58,10 +55,10 @@ let dropdownItem = document
         i.remove();
       });
       document.querySelector(".dropdown-toggle").innerHTML = item.innerHTML;
-      console.log(e.target.dataset.id);
+
       let res = await fetch(`/api/cards?deck_id=${e.target.dataset.id}`);
       let data = await res.json();
-      console.log("data: ", data);
+
       listContainer.dataset.deck_id = e.target.dataset.id;
       data.forEach((card) => {
         const cardLi = document.createElement("li");
@@ -86,7 +83,6 @@ let dropdownItem = document
         });
       });
       removeDeckBtn.addEventListener("click", () => {
-        console.log("Clicking delete");
         fetch("api/decks/" + e.target.dataset.id, {
           method: "DELETE",
         }).then((response) => {
@@ -98,27 +94,12 @@ let dropdownItem = document
     });
   });
 
-// removeDeckBtn.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   console.log(dropDownMenu);
-//   dropDownMenu.forEach((item) => {
-//     console.log(item);
-//   });
-
-//   fetch("/api/decks/" + item.dataset.id, {
-//     method: "DELETE",
-//   })
-//     .then((res) => res.text())
-//     .then((res) => console.log(res));
-// });
-
 function closeModal() {
   modal.style.display = "none";
   newCardBtn.style.display = "block";
 }
 
 function newCard() {
-  console.log("clear");
   frontInputEl.value = "";
   backInputEl.value = "";
   saveBtn.style.display = "block";
@@ -170,7 +151,7 @@ listCardContainer.addEventListener("click", function (e) {
     const word = e.target.innerHTML.split(" / ");
     frontInputEl.value = word[0];
     backInputEl.value = word[1];
-    console.log(word);
+
     saveBtn.style.display = "none";
     // updateBtn.style.display = "block";
     // updateBtn.addEventListener("click", (event) => {
