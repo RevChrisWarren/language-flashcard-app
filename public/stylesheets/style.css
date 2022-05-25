@@ -125,7 +125,20 @@ a:link {
 
 /*  */
 #deck-dropdown {
-  
+  width: 100%;
+}
+
+#deck-container ul {
+  width: 100%;
+  text-align: center;
+}
+
+#deck-select-text{
+  text-align: center;
+  border-bottom: 1px solid #333;
+  margin-left: 25px;
+  margin-right: 25px;
+  padding-bottom: 20px;
 }
 
 /* container for sizing and positioning drilled card element */
