@@ -122,3 +122,53 @@ a:link {
   color: rgb(227, 51, 177);
   transition: 0.75s;
 }
+
+/*  */
+#deck-dropdown {
+  
+}
+
+/* container for sizing and positioning drilled card element */
+#card-container{
+  position: relative;
+  height: 250px;
+  width: 320px;
+}
+
+/* styles for main card container which houses front and back elements of drilled cards */
+#card-content{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+}
+
+/* class applied to current drilling card in order to force flip to back */
+.card-flip{
+  transform: rotateY(180deg);
+}
+
+/* styling for front part of drilling card */
+#card-front{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: yellow;
+}
+
+#card-front button {
+  margin-top: 100px;
+  margin-left: 50%;
+}
+
+/* styling for back part of drilling card */
+#card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  background: orange;
+}
