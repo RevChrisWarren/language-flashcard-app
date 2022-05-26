@@ -19,20 +19,22 @@
         <h1 class="coname"><a href="/">Lingo</a>
         </h1>
         <nav>
-          {{#if edit}}
-            <a href="/decks">My Decks</a>
+          <a href="/edit">Edit your Decks</a></br>
+          <a href="/drill">Drill</a></br>
+          {{#if loggedIn}}
+          <button id="logout" class="btn btn-danger">Logout</button>
           {{/if}}
-          <a href="/play">Play!</a>
-          <button id="logout" class="btn-no-style">Logout</button>
         </nav>
       </header>
       <main>
         {{{body}}}
       </main>
-      <footer class="d-flex justify-content-center">
+      {{!-- <footer class="d-flex justify-content-center">
         <p class="foot">Thanks for playing!</p>
-      </footer>
+      </footer> --}}
     </div>
-
+ {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+    {{/if}}
   </body>
 </html>

@@ -20,6 +20,7 @@ Create an application that allows users to create a log-in and then log into the
 * Handlebars
 * Bootstrap
 * Popper.js
+
 * mySQL
 * Express Server
 * and deployed to Heroku
