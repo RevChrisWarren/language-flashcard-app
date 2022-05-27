@@ -50,7 +50,11 @@ router.put("/:card_id", (req, res) => {
       },
       { where: { id: req.params.card_id } }
     )
-      .then((dbCardData) => res.json(dbCardData))
+      .then(
+        (dbCardData) => {
+          res.json(dbCardData)
+          console.log("UPDATE SUCCESSFUL, CARD DATA IS", dbCardData)
+        })
       .catch((err) => {
         console.log(err);
         res.status(500).json(err);

@@ -38,7 +38,7 @@ Card.init(
         },
         dueDate: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         deck_id: {
             type: DataTypes.INTEGER,
