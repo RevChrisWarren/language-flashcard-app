@@ -11,7 +11,7 @@ const newDeckEntryField = document.querySelector("#new-deck-field");
 const dropDownMenu = document.querySelector(".dropdown-menu");
 const span = document.querySelector(".close");
 const newCardBtn = document.querySelector(".new-card-btn");
-// const updateBtn = document.querySelector(".edit");
+const updateBtn = document.querySelector(".edit");
 const removeDeckBtn = document.querySelector(".remove-deck-btn");
 
 const cardListArr = [];
@@ -103,7 +103,7 @@ function newCard() {
   frontInputEl.value = "";
   backInputEl.value = "";
   saveBtn.style.display = "block";
-  // UpdateBtn.style.display = "none";
+  UpdateBtn.style.display = "none";
 }
 
 async function saveFrontBack(event) {
@@ -146,38 +146,6 @@ async function saveFrontBack(event) {
 }
 
 const listCardContainer = document.querySelector(".list-container");
-listCardContainer.addEventListener("click", function (e) {
-  if (e.target.classList.contains("list-card")) {
-    const word = e.target.innerHTML.split(" / ");
-    frontInputEl.value = word[0];
-    backInputEl.value = word[1];
-
-    saveBtn.style.display = "none";
-    // updateBtn.style.display = "block";
-    // updateBtn.addEventListener("click", (event) => {
-    //   event.preventDefault();
-    //   e.target.innerHTML = frontInputEl.value + " / " + backInputEl.value;
-    //   fetch(`/api/cards`, {
-    //     method: "PUT",
-    //     body: JSON.stringify({
-    //       front: word[0],
-    //       back: word[1],
-    //     }),
-    //     headers: {
-    //       "Content-type": "application/json; charset=UTF-8",
-    //     },
-    //   })
-    //     .then((response) => response.json())
-    //     .then((json) => console.log(json));
-    // });
-  }
-});
-
-// function updateCard(e) {
-//   e.preventDefault();
-//   console.log("update");
-//   console.log(e.target);
-// }
 
 saveBtn.addEventListener("click", saveFrontBack);
 addNewDeckBtn.addEventListener("click", addNewDeck);
