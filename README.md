@@ -1,6 +1,7 @@
 # LINGO
 
 ## A language learning app!
+![Application GIF](./public/images/GIF-app.gif)
 
 ## Purpose
 Create an application that allows users to create a log-in and then log into the app, allows users once logged in to create decks of vocabulary cards to assist in learning another language, and give the users options to create new "flash cards," edit existing cards, and delete cards and entire decks.

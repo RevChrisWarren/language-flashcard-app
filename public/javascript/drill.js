@@ -18,17 +18,35 @@ async function deckSelection(e) {
     // resets cardIterator to 0 everytime a new deck is selected
     cardIterator = 0;
    
-    const cardContainerEl = document.getElementById("card-container");
-    cardContainerEl.classList.remove("d-none");
-
     const deckDropDownEl = document.getElementById("deck-dropdown");
     deckDropDownEl.textContent = e.target.textContent;
 
+    const cardContainerEl = document.getElementById("card-container");
+    cardContainerEl.classList.remove("d-none");
+
+    // function to select drill or learn
+    // selectDrillLearn();
+    
+    // function to update HTMl when card drilling is selected
+    const flipCardEl = document.getElementById("flip-button");
+    flipCardEl.classList.remove("d-none");
     populateDrillCard(cards);
+}
+
+// function that updates HTML to allow user to choose to Drill or Learn New Cards with a selection;
+function selectDrillLearn() {
+    const drillChoiceEl = document.getElementById("drill-button");
+    const learnChoiceEl = document.getElementById("learn-button");
+
+    drillChoiceEl.classList.remove("d-none");
+    learnChoiceEl.classList.remove("d-none");
 }
 
 // sets up html for a card drill and iterates the counterIterator
 function populateDrillCard(cards) {
+
+        const cardContainerEl = document.getElementById("card-container");
+        cardContainerEl.classList.remove("d-none");
 
     if (cardIterator < cards.length - 1) {
         const cardFrontTextEl = document.getElementById("card-front-text");
