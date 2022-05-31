@@ -182,10 +182,16 @@ a:link {
   
 }
 
-#card-front button {
+#card-front #flip-button {
   width: 50%;
   margin-top: 25%;
   margin-left: 25%;
+}
+
+#card-front #drill-button, #learn-button {
+  width: 33%;
+  margin-top: 25%;
+  display: inline-block;
 }
 
 #card-front h4, #card-back h4 {
