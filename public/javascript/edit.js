@@ -146,6 +146,44 @@ async function saveFrontBack(event) {
 }
 
 const listCardContainer = document.querySelector(".list-container");
+listCardContainer.addEventListener("click", updateViewForSave);
+
+function updateViewForSave(e) {
+  if (e.target.classList.contains("list-card")) {
+    const word = e.target.innerHTML.split(" / ");
+
+    frontInputEl.value = word[0];
+    backInputEl.value = word[1];
+
+    saveBtn.style.display = "none";
+    updateBtn.style.display = "block";
+    updateBtn.dataset.card_id = e.target.dataset.card_id;
+  }
+}
+
+function sendCardUpdate(e) {
+  e.preventDefault();
+  const card_id = e.target.dataset.card_id;
+  const cardIdString = "'" + card_id + "'";
+  const sideCard = document.querySelector(`[data-card_id=${cardIdString}]`);
+
+  sideCard.innerHTML = frontInputEl.value + " / " + backInputEl.value;
+
+  fetch(`/api/cards/${card_id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      front: frontInputEl.value,
+      back: backInputEl.value,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+}
+
+updateBtn.addEventListener("click", sendCardUpdate);
 
 saveBtn.addEventListener("click", saveFrontBack);
 addNewDeckBtn.addEventListener("click", addNewDeck);
