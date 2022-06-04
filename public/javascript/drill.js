@@ -17,7 +17,7 @@ async function deckSelection(e) {
     currentCards = cards;
     // resets cardIterator to 0 everytime a new deck is selected
     cardIterator = 0;
-   
+   console.log(currentCards);
     const deckDropDownEl = document.getElementById("deck-dropdown");
     deckDropDownEl.textContent = e.target.textContent;
 
@@ -48,7 +48,7 @@ function populateDrillCard(cards) {
         const cardContainerEl = document.getElementById("card-container");
         cardContainerEl.classList.remove("d-none");
 
-    if (cardIterator < cards.length - 1) {
+    if (cardIterator < cards.length) {
         const cardFrontTextEl = document.getElementById("card-front-text");
         const cardBackTextEl = document.getElementById("card-back-text");
         const buttonContainerEl = document.getElementById("button-container");
