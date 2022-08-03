@@ -13,6 +13,8 @@ Create an application that allows users to create a log-in and then log into the
 * On the drill page, users can select the deck they want to study. It will display cards to the user and allow the user to determine whether they got the card correct pr incorrect.
 * Based on the feedback of the user, the app uses an algorithm called "supermemo" to determine how often that card should be reviewed. If the card is well know, the algorithm puts review off for a period of time. If the card is relatively unknown, the algorithm places it in the review queue much sooner.
 
+## View Deployed App at https://mysterious-inlet-45382.herokuapp.com/
+
 ## Built With
 * Supermemo
 * Node.js
